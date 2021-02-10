@@ -13,3 +13,10 @@
 .user-profile td.ng2-smart-actions ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
     margin-left: 0.5em;
 }
+:host ::ng-deep ng2-smart-table .edit-icon{
+    margin-right: 0.75rem;
+}
+:host ::ng-deep ng2-smart-table .ng2-smart-action-edit-save,
+:host ::ng-deep ng2-smart-table .ng2-smart-action-add-create{
+    margin-right: 0.5rem;
+}
