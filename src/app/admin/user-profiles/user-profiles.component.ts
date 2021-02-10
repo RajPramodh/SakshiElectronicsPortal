@@ -1,32 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-
+import { LocalDataSource } from 'ng2-smart-table';
+ 
 @Component({
   selector: 'app-user-profiles',
   templateUrl: './user-profiles.component.html',
   styleUrls: ['./user-profiles.component.css']
 })
 export class UserProfilesComponent implements OnInit {
-
+ 
+  sourceData = new LocalDataSource();
+ 
   constructor() { }
-
+ 
   ngOnInit() {
+    this.sourceData.load(this.data);
   }
-
+ 
   settings = {
-
+ 
     saveButtonContent: 'save',
     cancelButtonContent: 'cancel',
-    
+ 
     delete: {
       confirmDelete: true,
       deleteButtonContent: '<i  class="fa fa-trash-o delete-icon" aria-hidden="true"></i>',
     },
-    add: {
-      confirmCreate: true,
-    },
     edit: {
       confirmSave: true,
       editButtonContent: '<i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"></i>'
+    },
+    add: {
+      confirmCreate: true,
     },
     columns: {
       id: {
@@ -46,7 +50,7 @@ export class UserProfilesComponent implements OnInit {
       class: 'table table-bordered'
     },
   };
-
+ 
   data = [
     {
       id: 1,
@@ -60,7 +64,7 @@ export class UserProfilesComponent implements OnInit {
       username: "Antonette",
       email: "Shanna@melissa.tv"
     },
-
+ 
     {
       id: 11,
       roles: "role3",
@@ -68,7 +72,7 @@ export class UserProfilesComponent implements OnInit {
       email: "Rey.Padberg@rosamond.biz"
     }
   ];
-
+ 
   onDeleteConfirm(event) {
     console.log("Delete Event In Console")
     console.log(event);
@@ -78,15 +82,19 @@ export class UserProfilesComponent implements OnInit {
       event.confirm.reject();
     }
   }
-
+ 
   onCreateConfirm(event) {
     console.log("Create Event In Console")
     console.log(event);
-
+    this.data.push(event.newData)
+    this.sourceData.load(this.data);
+    event.confirm.resolve();
   }
-
+ 
   onSaveConfirm(event) {
     console.log("Edit Event In Console")
     console.log(event);
+    this.sourceData.update(event.data, event.newData);
+    event.confirm.resolve();
   }
 }
