@@ -36,6 +36,7 @@ import { IotDashboardComponent } from './iot-dashboard/iot-dashboard.component';
 import { MapsModule } from '../maps/maps.module';
 import { UserProfilesComponent } from './user-profiles/user-profiles.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { EditFormComponent } from './user-profiles/edit-form/edit-form.component';
 
 @NgModule({
 	imports: [
@@ -76,7 +77,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 		ReferralsComponent,
 		TotalRevenueComponent,
 		IotDashboardComponent,
-		UserProfilesComponent
+		UserProfilesComponent,
+		EditFormComponent
 	]
 })
 export class AdminModule { }
