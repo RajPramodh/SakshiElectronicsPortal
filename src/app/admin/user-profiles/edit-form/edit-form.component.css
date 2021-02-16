@@ -1,0 +1,36 @@
+ngb-modal-window .modal {
+    z-index: 1050 !important;
+    top:20%
+}
+ngb-modal-window .fade {
+    opacity: 1;
+    -webkit-transition: opacity .15s linear;
+    transition: opacity .15s linear;
+}
+.close{
+    border: none;
+    color: #D7373C;
+    opacity: 1;
+    outline: none !important;
+}
+.secondary{
+    margin-right: 10px;
+    background: #ffff !important;
+    color: #00bcd4 !important;
+    border: 1px solid #00bcd4;
+}
+.modal-title{
+    font-size: 18px;
+    font-weight: 600;
+}
+ 
+.btn-sm{
+    background: #00bcd4;
+    font-size: 13px;
+    height: 30px;
+    color: #ffff;
+    border-radius: 2rem;
+    padding-right: 20px;
+    padding-left: 20px;
+    border: 1px solid #00bcd4;
+}
