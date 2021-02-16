@@ -37,6 +37,8 @@ import { MapsModule } from '../maps/maps.module';
 import { UserProfilesComponent } from './user-profiles/user-profiles.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { EditFormComponent } from './user-profiles/edit-form/edit-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -59,7 +61,9 @@ import { EditFormComponent } from './user-profiles/edit-form/edit-form.component
 		BlogsModule,
         WidgetsModule,
 		MapsModule,
-		Ng2SmartTableModule
+		Ng2SmartTableModule,
+		ReactiveFormsModule,
+        FormsModule
 	],
 	declarations: [
 		AdminComponent,
