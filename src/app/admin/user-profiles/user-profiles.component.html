@@ -1,24 +1,33 @@
 <div class="container-fluid" *ngIf="!isResizing">
-  <div class="block-header">
-      <div class="row">
-          <div class="col-lg-5 col-md-8 col-sm-12">
-              <h2>
-                  <a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"
-                      (click)="toggleFullWidth()">
-                      <i class="fa fa-arrow-left" *ngIf="sidebarVisible"></i>
-                      <i class="fa fa-arrow-right" *ngIf="!sidebarVisible"></i>
-                  </a>
-                  User Proiles
-              </h2>
-              <ul class="breadcrumb">
-                  <li class="breadcrumb-item"><a [routerLink]="['/admin']"><i class="icon-home"></i></a></li>
-                  <li class="breadcrumb-item">Admin</li>
-                  <li class="breadcrumb-item active">User Proiles</li>
-              </ul>
-          </div>
-
-      </div>
-  </div>
-
-<ng2-smart-table class="user-profile" [settings]="settings" [source]="data" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
- (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-8 col-sm-12">
+                <h2>
+                    <a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"
+                        (click)="toggleFullWidth()">
+                        <i class="fa fa-arrow-left" *ngIf="sidebarVisible"></i>
+                        <i class="fa fa-arrow-right" *ngIf="!sidebarVisible"></i>
+                    </a>
+                    User Proiles
+                </h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="['/admin']"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item">Admin</li>
+                    <li class="breadcrumb-item active">User Proiles</li>
+                </ul>
+            </div>
+ 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 0.75rem;">
+            <a class="add-new-link" (click)="onAdd()">Add New </a>
+        </div>
+    </div>
+ 
+    <!-- <ng2-smart-table class="user-profile" [settings]="settings" [source]="data" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
+ ></ng2-smart-table> -->
+    <ng2-smart-table class="user-profile" [settings]="settings" [source]="data"
+        (deleteConfirm)="onDeleteConfirm($event)" (custom)="onCustomAction($event)"
+        (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+ 
