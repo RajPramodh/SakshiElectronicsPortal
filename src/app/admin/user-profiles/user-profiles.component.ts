@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalDataSource } from 'ng2-smart-table';
+import { EditFormComponent } from './edit-form/edit-form.component';
  
 @Component({
   selector: 'app-user-profiles',
@@ -10,7 +12,7 @@ export class UserProfilesComponent implements OnInit {
  
   sourceData = new LocalDataSource();
  
-  constructor() { }
+  constructor(private readonly modalService: NgbModal) { }
  
   ngOnInit() {
     this.sourceData.load(this.data);
@@ -21,17 +23,23 @@ export class UserProfilesComponent implements OnInit {
     saveButtonContent: 'save',
     cancelButtonContent: 'cancel',
  
+    actions: {
+      edit: false,
+      add: false,
+      custom: [{ name: 'onEdit', title: "<i class='fa fa-pencil-square-o edit-icon' aria-hidden='true'></i>" }],
+      position: 'left'
+    },
     delete: {
       confirmDelete: true,
       deleteButtonContent: '<i  class="fa fa-trash-o delete-icon" aria-hidden="true"></i>',
     },
-    edit: {
-      confirmSave: true,
-      editButtonContent: '<i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"></i>'
-    },
-    add: {
-      confirmCreate: true,
-    },
+    // edit: {
+    //   confirmSave: true,
+    //   editButtonContent: '<i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"></i>'
+    // },
+    // add: {
+    //   confirmCreate: true,
+    // },
     columns: {
       id: {
         title: 'ID',
@@ -73,6 +81,22 @@ export class UserProfilesComponent implements OnInit {
     }
   ];
  
+  onCustomAction(event) {
+    switch (event.action) {
+      case 'onEdit':
+        this.onEdit(event.data);
+    }
+  }
+ 
+  onEdit(rowData: any) {
+    const modalRef = this.modalService.open(EditFormComponent, { size: 'lg', backdropClass: 'in', windowClass: 'modal-holder', centered: true });
+    modalRef.componentInstance.editData = rowData;
+  }
+ 
+  onAdd() {
+    this.modalService.open(EditFormComponent, { size: 'lg', backdropClass: 'in', windowClass: 'modal-holder', centered: true });
+  }
+ 
   onDeleteConfirm(event) {
     console.log("Delete Event In Console")
     console.log(event);
@@ -98,3 +122,4 @@ export class UserProfilesComponent implements OnInit {
     event.confirm.resolve();
   }
 }
+ 
