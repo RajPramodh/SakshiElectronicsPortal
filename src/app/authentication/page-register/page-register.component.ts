@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ApiCallService } from '../../../app/services/api-call.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-page-register',
@@ -15,7 +16,7 @@ export class PageRegisterComponent implements OnInit {
     isProcessing: boolean = false;
     errorMsg: string;
 
-    constructor(private router: Router, private formBuilder: FormBuilder, private apiCallService: ApiCallService) { }
+    constructor(private router: Router, private formBuilder: FormBuilder, private apiCallService: ApiCallService, private spinnerService: NgxSpinnerService) { }
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
@@ -27,6 +28,7 @@ export class PageRegisterComponent implements OnInit {
     }
 
     onSubmit() {
+        this.spinnerService.show();
         this.isProcessing = true;
 
         if (this.registerForm.invalid) {
@@ -48,12 +50,14 @@ export class PageRegisterComponent implements OnInit {
 
         this.apiCallService.postData(environment.appUrl, payload).subscribe(
             (response: any) => {
+                this.spinnerService.hide();
                 if(response!==null){
                     this.isProcessing = false;
                     this.router.navigate(['/authentication/page-login']);
                 }
                 
             }, (error) => {
+                this.spinnerService.hide();
                 this.errorMsg = error.message;
             }
         )

@@ -6,6 +6,9 @@ import { isNull } from 'util';
 import { ApiCallService } from '../../services/api-call.service';
 import {LoginResponse, UserService} from '../../model/user.service';
 import { HttpHeaders } from '@angular/common/http';
+import { DataSharingService } from '../../../app/services/data-sharing.service';
+import { AuthService } from '../../../app/services/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
 	selector: 'app-page-login',
@@ -20,8 +23,9 @@ export class PageLoginComponent implements OnInit {
 	errorMsg: String;
 	loginResponse: LoginResponse;
 
-	constructor(private readonly formBuilder: FormBuilder, public readonly userService: UserService, private readonly apiCallService: ApiCallService, private readonly router: Router) {
-
+	constructor(private readonly formBuilder: FormBuilder, public readonly userService: UserService, private readonly apiCallService: ApiCallService, 
+		private readonly router: Router, public dataSharingService: DataSharingService, public authService: AuthService, private spinnerService: NgxSpinnerService) {
+			this.checkSessionActive();
 	}
 
 
@@ -32,7 +36,17 @@ export class PageLoginComponent implements OnInit {
 		});
 	}
 
+	checkSessionActive() {
+		if (this.authService.checkSessionActive()) {
+		  this.router.navigate(['/admin']);
+		}
+		else {
+		  this.router.navigate(['/authentication']);
+		}
+	  }
+
 	onSubmit() {
+		this.spinnerService.show();
 		this.isProcessing = true;
 
 		if (this.loginForm.invalid) {
@@ -52,16 +66,21 @@ export class PageLoginComponent implements OnInit {
 			})
 		};
 
-		this.apiCallService.postData(environment.appUrl + '/api/auth/signin' ,payload ,httpOptions).subscribe(
+		this.apiCallService.postData(environment.appUrl + '/auth/signin' ,payload ,httpOptions).subscribe(
 			(response: any) => {
+				this.spinnerService.hide();
 				console.log(response);
-				if(response!==null){
-					this.loginResponse = response;
+				if(response!==null){ 
+					this.dataSharingService.loginResponse = response;
+					this.authService.setSession(this.dataSharingService.loginResponse);
+					this.dataSharingService.latestUserDetails(response);
+					this.router.navigate(['/admin/user-profiles']);
 				}
 
 			},
 			(error) => {
-
+				this.spinnerService.hide();
+				console.log(error);
 			}
 		)
 
@@ -91,6 +110,6 @@ export class PageLoginComponent implements OnInit {
 		// 	}
 		// )
 
-		this.router.navigate(['/admin/dashboard/user-profiles']);
+		
 	}
 }

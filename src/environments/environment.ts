@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  appUrl: 'http://dummy.restapiexample.com/api/v1/',
+  appUrl: 'https://shielded-mountain-53105.herokuapp.com/api',
 };

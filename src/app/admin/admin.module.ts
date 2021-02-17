@@ -39,6 +39,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { EditFormComponent } from './user-profiles/edit-form/edit-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
 	imports: [
@@ -63,7 +64,8 @@ import { FormsModule } from '@angular/forms';
 		MapsModule,
 		Ng2SmartTableModule,
 		ReactiveFormsModule,
-        FormsModule
+		FormsModule,
+		NgxSpinnerModule
 	],
 	declarations: [
 		AdminComponent,
@@ -82,7 +84,8 @@ import { FormsModule } from '@angular/forms';
 		TotalRevenueComponent,
 		IotDashboardComponent,
 		UserProfilesComponent,
-		EditFormComponent
-	]
+		EditFormComponent,
+	],
+	entryComponents:[EditFormComponent]
 })
 export class AdminModule { }

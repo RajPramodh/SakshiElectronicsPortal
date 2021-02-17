@@ -14,6 +14,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import * as $ from 'jquery';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
         FullCalendarModule,
         NgMultiSelectDropDownModule.forRoot(),
         LeafletModule.forRoot(),
-        NgxGalleryModule
+        NgxGalleryModule,
+        NgxSpinnerModule
     ],
     providers: [],
     bootstrap: [AppComponent]

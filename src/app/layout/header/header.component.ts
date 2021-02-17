@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../../app/services/auth.service';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({
@@ -18,7 +20,8 @@ export class HeaderComponent implements OnInit {
 	@Output() toggleSettingDropMenuEvent = new EventEmitter();
 	@Output() toggleNotificationDropMenuEvent = new EventEmitter();
 
-	constructor(private config: NgbDropdownConfig, private themeService: ThemeService) {
+	constructor(private config: NgbDropdownConfig, private themeService: ThemeService, private authService: AuthService,
+		private router: Router) {
 		config.placement = 'bottom-right';
 	}
 
@@ -35,6 +38,11 @@ export class HeaderComponent implements OnInit {
 
 	toggleSideMenu(){
 		this.themeService.showHideMenu();
+	}
+
+	logOut(){
+		this.authService.clearSession();
+		this.router.navigate(['/authentication']);
 	}
 
 }

@@ -13,6 +13,7 @@ import { PageTryLaterComponent } from './page-try-later/page-try-later.component
 import { PagesModule } from '../pages/pages.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
 	declarations: [PageLoginComponent, AuthenticationComponent, PageRegisterComponent, PageLockscreenComponent, PageForgotPasswordComponent, PageNotFoundComponent, PageForbiddonErrorComponent, PageIsErrorComponent, PageTryLaterComponent],
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 		routing,
 		PagesModule,
         RouterModule,
-        FormsModule
+		FormsModule,
+		NgxSpinnerModule
 	]
 })
 export class AuthenticationModule { }

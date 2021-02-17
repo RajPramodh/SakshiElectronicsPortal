@@ -27,7 +27,7 @@
                         <a [routerLink]="['/admin/app/app-calendar']"
                             class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="icon-calendar"></i></a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a [routerLink]="['/admin/app/app-chat']" class="icon-menu d-none d-sm-block"><i
                                 class="icon-bubbles"></i></a>
                     </li>
@@ -99,7 +99,7 @@
                             </li>
                             <li class="footer"><a href="javascript:void(0);" class="more">See all notifications</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="dropdown" ngbDropdown>
                         <a class="dropdown-toggle icon-menu" ngbDropdownToggle><i class="icon-equalizer"></i></a>
                         <ul class="dropdown-menu user-menu menu-icon" ngbDropdownMenu>
@@ -120,7 +120,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a [routerLink]="['/authentication/page-login']" class="icon-menu d-none d-sm-block"><i
+                        <a class="icon-menu d-none d-sm-block" (click)="logOut()"><i
                                 class="icon-login"></i></a>
                     </li>
                 </ul>

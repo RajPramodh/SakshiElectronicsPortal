@@ -48,19 +48,21 @@ import { IotDashboardComponent } from './iot-dashboard/iot-dashboard.component';
 import { BlogPostComponent } from '../blogs/blog-post/blog-post.component';
 import { PageLeafletComponent } from '../maps/page-leaflet/page-leaflet.component';
 import { UserProfilesComponent } from './user-profiles/user-profiles.component';
+import { AuthGuardService } from '../services/auth-guard.service';
 
 const routes: Routes = [   
     {
         path: '',
         component: AdminComponent,
         children: [
-            { path: '', redirectTo:'dashboard'},
+            { path: '', redirectTo:''},
             {
-                path: 'dashboard',
+                path: '',
                 children: [
                     { path: '', redirectTo: 'user-profiles', pathMatch: 'full' },
-                    { path: 'user-profiles', component: UserProfilesComponent, data: { title: 'Profiles Management' } },
-                    { path: 'iot', component: IotDashboardComponent, data: { title: ':: Lucid Angular :: Dashboard :: IoT ::' } },
+                    { path: 'user-profiles', component: UserProfilesComponent, data: { title: ':: Sakshi Electronics :: Profiles Management' },
+                    canActivate: [AuthGuardService] },
+                    { path: 'iot', component: IotDashboardComponent, data: { title: ':: Sakshi Electronics :: Dashboard :: IoT ::' } },
                 ]
             },
             { 
@@ -69,13 +71,13 @@ const routes: Routes = [
                     {
                         path: 'app-inbox',
                         children: [
-                            { path: '', pathMatch: 'full', component: InboxComponent, data: { title: ':: Lucid Angular :: App :: Inbox ::' }  },
-                            { path: 'compose', component: ComposeComponent, data: { title: ':: Lucid Angular :: App :: Compose ::' } }
+                            { path: '', pathMatch: 'full', component: InboxComponent, data: { title: ':: Sakshi Electronics :: App :: Inbox ::' }  },
+                            { path: 'compose', component: ComposeComponent, data: { title: ':: Sakshi Electronics :: App :: Compose ::' } }
                         ]
                     },
-                    { path: 'app-chat', component: AppChatComponent, data: { title: ':: Lucid Angular :: App :: Chat ::' } },
-                    { path: 'app-contact-grid', component: ContactGridComponent, data: { title: ':: Lucid Angular :: App :: Contacts ::' } },
-                    { path: 'app-calendar', component: AppCalendarComponent, data: { title: ':: Lucid Angular :: App :: Calendar ::' } },
+                    { path: 'app-chat', component: AppChatComponent, data: { title: ':: Sakshi Electronics :: App :: Chat ::' } },
+                    { path: 'app-contact-grid', component: ContactGridComponent, data: { title: ':: Sakshi Electronics :: App :: Contacts ::' } },
+                    { path: 'app-calendar', component: AppCalendarComponent, data: { title: ':: Sakshi Electronics :: App :: Calendar ::' } },
                     
                 ]
             },
@@ -83,54 +85,56 @@ const routes: Routes = [
                 path: 'ui-elements',
                 children: [
                     { path: '', redirectTo: 'typography', pathMatch: 'full' },
-                    { path: 'typography', component: TypographyComponent, data: { title: ':: Lucid Angular :: UI Elements :: Typography ::' } },
-                    { path: 'ui-tabs', component: UiTabsComponent, data: { title: ':: Lucid Angular :: UI Elements :: Tabs ::' } },
-                    { path: 'ui-buttons', component: UiButtonsComponent, data: { title: ':: Lucid Angular :: UI Elements :: Buttons ::' } },
-                    { path: 'ui-bootstrap', component: UiBootstrapComponent, data: { title: ':: Lucid Angular :: UI Elements :: Bootstrap ::' } },
-                    { path: 'ui-icons', component: UiIconsComponent, data: { title: ':: Lucid Angular :: UI Elements :: Icons ::' } },
-                    { path: 'ui-colors', component: UiColorsComponent, data: { title: ':: Lucid Angular :: UI Elements :: Colors ::' } },
-                    { path: 'ui-list-group', component: UiListGroupComponent, data: { title: ':: Lucid Angular :: UI Elements :: Lists ::' } },
-                    { path: 'ui-media-object', component: UiMediaObjectComponent, data: { title: ':: Lucid Angular :: UI Elements :: Media ::' } },
-                    { path: 'ui-modal', component: UiModalsComponent, data: { title: ':: Lucid Angular :: UI Elements :: Modal ::' } },
-                    { path: 'ui-progressbars', component: UiProgressbarsComponent, data: { title: ':: Lucid Angular :: UI Elements :: Prograssbars ::' } },
-                    { path: 'ui-notifications', component: UiNotificationsComponent, data: { title: ':: Lucid Angular :: UI Elements :: Notifications ::' } },
+                    { path: 'typography', component: TypographyComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Typography ::' } },
+                    { path: 'ui-tabs', component: UiTabsComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Tabs ::' } },
+                    { path: 'ui-buttons', component: UiButtonsComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Buttons ::' } },
+                    { path: 'ui-bootstrap', component: UiBootstrapComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Bootstrap ::' } },
+                    { path: 'ui-icons', component: UiIconsComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Icons ::' } },
+                    { path: 'ui-colors', component: UiColorsComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Colors ::' } },
+                    { path: 'ui-list-group', component: UiListGroupComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Lists ::' } },
+                    { path: 'ui-media-object', component: UiMediaObjectComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Media ::' } },
+                    { path: 'ui-modal', component: UiModalsComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Modal ::' } },
+                    { path: 'ui-progressbars', component: UiProgressbarsComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Prograssbars ::' } },
+                    { path: 'ui-notifications', component: UiNotificationsComponent, data: { title: ':: Sakshi Electronics :: UI Elements :: Notifications ::' } },
                 ]
             },
             {
                 path: 'file-manager',
                 children: [
                     { path: '', redirectTo: 'file-documents', pathMatch: 'full' },
-                    { path: 'file-documents', component: FileDocumentsComponent, data: { title: ':: Lucid Angular :: File Manager :: Documents ::' } },
-                    { path: 'file-media', component: FileMediaComponent, data: { title: ':: Lucid Angular :: File Manager :: Media ::' } },
-                    { path: 'file-images', component: FileImagesComponent, data: { title: ':: Lucid Angular :: File Manager :: Images ::' } }
+                    { path: 'file-documents', component: FileDocumentsComponent, data: { title: ':: Sakshi Electronics :: File Manager :: Documents ::' } },
+                    { path: 'file-media', component: FileMediaComponent, data: { title: ':: Sakshi Electronics :: File Manager :: Media ::' } },
+                    { path: 'file-images', component: FileImagesComponent, data: { title: ':: Sakshi Electronics :: File Manager :: Images ::' } }
                 ]
             },
             {
                 path: 'tables',
                 children: [
                     { path: '', redirectTo: 'table-normal', pathMatch: 'full' },
-                    { path: 'table-normal', component: TableNormalComponent, data: { title: ':: Lucid Angular :: Tables :: Normal Tables ::' }  },
+                    { path: 'table-normal', component: TableNormalComponent, data: { title: ':: Sakshi Electronics :: Tables :: Normal Tables ::' }  },
                 ]
             },
             {
                 path: 'pages',
                 children: [
                     { path: '', redirectTo: 'page-blank', pathMatch: 'full' },
-                    { path: 'page-blank', component: PageBlankComponent, data: { title: ':: Lucid Angular :: Pages :: Blank ::' }  },
-                    { path: 'page-profile', component: PageProfileComponent, data: { title: ':: Lucid Angular :: Pages :: Profile ::' } },
-                    { path: 'page-profile2', component: PageProfileV2Component, data: { title: ':: Lucid Angular :: Pages :: Profile - V2 ::' } },
-                    { path: 'page-gallery', component: PageGalleryComponent, data: { title: ':: Lucid Angular :: Pages :: Gallery ::' } },
-                    { path: 'page-timeline', component: PageTimelineComponent, data: { title: ':: Lucid Angular :: Pages :: Timeline ::' } },
-                    { path: 'page-pricing', component: PagePricingComponent, data: { title: ':: Lucid Angular :: Pages :: Pricing ::' } },
-                    { path: 'page-invoices', component: PageInvoicesComponent, data: { title: ':: Lucid Angular :: Pages :: Invoices ::' } },
-                    { path: 'page-invoices2', component: PageInvoicesV2Component, data: { title: ':: Lucid Angular :: Pages :: Invoices - V2 ::' } },
-                    { path: 'page-search-results', component: PageSearchResultsComponent, data: { title: ':: Lucid Angular :: Pages :: Search Results ::' } },
-                    { path: 'page-helper-class', component: PageHelperClassComponent, data: { title: ':: Lucid Angular :: Pages :: Classes ::' } },
-                    { path: 'page-teams-board', component: PageTeamsBoardComponent, data: { title: ':: Lucid Angular :: Pages :: Team ::' } },
-                    { path: 'page-projects-list', component: PageProjectsListComponent, data: { title: ':: Lucid Angular :: Pages :: Projects ::' } },
-                    { path: 'page-maintenance', component: PageProjectsListComponent, data: { title: ':: Lucid Angular :: Pages :: Maintenance ::' } },
-                    { path: 'page-testimonials', component: PageTestimonialsComponent, data: { title: ':: Lucid Angular :: Pages :: Testimonials ::' } },
-                    { path: 'page-faq', component: PageFaqComponent, data: { title: ':: Lucid Angular :: Pages :: Faq ::' } },
+                    { path: 'page-blank', component: PageBlankComponent, data: { title: ':: Sakshi Electronics :: Pages :: Blank ::' }  },
+                    { path: 'page-profile', component: PageProfileComponent, data: { title: ':: Sakshi Electronics :: Pages :: Profile ::' } ,
+                    canActivate: [AuthGuardService]},
+                    { path: 'page-profile2', component: PageProfileV2Component, data: { title: ':: Sakshi Electronics :: Pages :: Profile - V2 ::' },
+                    canActivate: [AuthGuardService] },
+                    { path: 'page-gallery', component: PageGalleryComponent, data: { title: ':: Sakshi Electronics :: Pages :: Gallery ::' } },
+                    { path: 'page-timeline', component: PageTimelineComponent, data: { title: ':: Sakshi Electronics :: Pages :: Timeline ::' } },
+                    { path: 'page-pricing', component: PagePricingComponent, data: { title: ':: Sakshi Electronics :: Pages :: Pricing ::' } },
+                    { path: 'page-invoices', component: PageInvoicesComponent, data: { title: ':: Sakshi Electronics :: Pages :: Invoices ::' } },
+                    { path: 'page-invoices2', component: PageInvoicesV2Component, data: { title: ':: Sakshi Electronics :: Pages :: Invoices - V2 ::' } },
+                    { path: 'page-search-results', component: PageSearchResultsComponent, data: { title: ':: Sakshi Electronics :: Pages :: Search Results ::' } },
+                    { path: 'page-helper-class', component: PageHelperClassComponent, data: { title: ':: Sakshi Electronics :: Pages :: Classes ::' } },
+                    { path: 'page-teams-board', component: PageTeamsBoardComponent, data: { title: ':: Sakshi Electronics :: Pages :: Team ::' } },
+                    { path: 'page-projects-list', component: PageProjectsListComponent, data: { title: ':: Sakshi Electronics :: Pages :: Projects ::' } },
+                    { path: 'page-maintenance', component: PageProjectsListComponent, data: { title: ':: Sakshi Electronics :: Pages :: Maintenance ::' } },
+                    { path: 'page-testimonials', component: PageTestimonialsComponent, data: { title: ':: Sakshi Electronics :: Pages :: Testimonials ::' } },
+                    { path: 'page-faq', component: PageFaqComponent, data: { title: ':: Sakshi Electronics :: Pages :: Faq ::' } },
                     
                 ]
             },
@@ -138,41 +142,41 @@ const routes: Routes = [
                 path: 'charts',
                 children: [
                     { path: '', redirectTo: 'chart-echarts', pathMatch: 'full' },
-                    { path: 'chart-echarts', component: ChartEchartComponent, data: { title: ':: Lucid Angular :: Charts :: E-Charts ::' } },
+                    { path: 'chart-echarts', component: ChartEchartComponent, data: { title: ':: Sakshi Electronics :: Charts :: E-Charts ::' } },
                 ]
             },
             {
                 path: 'forms',
                 children: [
                     { path: '', redirectTo: 'forms-validation', pathMatch: 'full' },
-                    { path: 'forms-validation', component: FormsValidationComponent, data: { title: ':: Lucid Angular :: Form Validations :: Forms ::' } },
-                    { path: 'forms-basic', component: FormsBasicComponent, data: { title: ':: Lucid Angular :: Form Basic :: Forms ::' } }
+                    { path: 'forms-validation', component: FormsValidationComponent, data: { title: ':: Sakshi Electronics :: Form Validations :: Forms ::' } },
+                    { path: 'forms-basic', component: FormsBasicComponent, data: { title: ':: Sakshi Electronics :: Form Basic :: Forms ::' } }
                 ]
             },
             {
                 path: 'blogs',
                 children: [
                     { path: '', redirectTo: 'blog-post', pathMatch: 'full' },
-                    { path: 'blog-post', component: BlogPostComponent, data: { title: ':: Lucid Angular :: Blog Post :: Blog ::' } },
-                    { path: 'blog-list', component: BlogListComponent, data: { title: ':: Lucid Angular :: Blog List :: Blog ::' } },
-                    { path: 'blog-details', component: BlogDetailsComponent, data: { title: ':: Lucid Angular :: Blog Details :: Blog ::' } }
+                    { path: 'blog-post', component: BlogPostComponent, data: { title: ':: Sakshi Electronics :: Blog Post :: Blog ::' } },
+                    { path: 'blog-list', component: BlogListComponent, data: { title: ':: Sakshi Electronics :: Blog List :: Blog ::' } },
+                    { path: 'blog-details', component: BlogDetailsComponent, data: { title: ':: Sakshi Electronics :: Blog Details :: Blog ::' } }
                 ]
             },
             {
                 path: 'widgets',
                 children: [
                     { path: '', redirectTo: 'widgets-data', pathMatch: 'full' },
-                    { path: 'widgets-data', component: WidgetsDataComponent, data: { title: ':: Lucid Angular :: Widgets Data :: Widgets ::' } },
-                    { path: 'widgets-weather', component: WidgetsWeatherComponent, data: { title: ':: Lucid Angular :: Widgets Weather :: Widgets ::' } },
-                    { path: 'widgets-blog', component: WidgetsBlogComponent, data: { title: ':: Lucid Angular :: Widgets Blog :: Widgets ::' } },
-                    { path: 'widgets-ecommerce', component: WidgetsEcommerceComponent, data: { title: ':: Lucid Angular :: Widgets eCommerce :: Widgets ::' } }
+                    { path: 'widgets-data', component: WidgetsDataComponent, data: { title: ':: Sakshi Electronics :: Widgets Data :: Widgets ::' } },
+                    { path: 'widgets-weather', component: WidgetsWeatherComponent, data: { title: ':: Sakshi Electronics :: Widgets Weather :: Widgets ::' } },
+                    { path: 'widgets-blog', component: WidgetsBlogComponent, data: { title: ':: Sakshi Electronics :: Widgets Blog :: Widgets ::' } },
+                    { path: 'widgets-ecommerce', component: WidgetsEcommerceComponent, data: { title: ':: Sakshi Electronics :: Widgets eCommerce :: Widgets ::' } }
                 ]
             },
             {
                 path: 'maps',
                 children: [
                     { path: '', redirectTo: 'leaflet', pathMatch: 'full' },
-                    { path: 'leaflet', component: PageLeafletComponent, data: { title: ':: Lucid Angular :: Maps :: Leaflet ::' } },
+                    { path: 'leaflet', component: PageLeafletComponent, data: { title: ':: Sakshi Electronics :: Maps :: Leaflet ::' } },
                 ]
             }
         ]

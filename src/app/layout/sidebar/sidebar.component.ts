@@ -2,6 +2,10 @@ import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core
 import { ThemeService } from '../../services/theme.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { DataSharingService } from '../../../app/services/data-sharing.service';
+import { AuthService } from '../../../app/services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
 	selector: 'app-sidebar',
@@ -18,9 +22,11 @@ export class SidebarComponent implements OnDestroy {
 	@Output() activeInactiveMenuEvent = new EventEmitter();
     public themeClass: string = "theme-cyan";
     public darkClass: string = "";
-    private ngUnsubscribe = new Subject();
+	private ngUnsubscribe = new Subject();
+	
+	private userName: String;
 
-	constructor(private themeService: ThemeService) {
+	constructor(private themeService: ThemeService, public dataSharingService: DataSharingService, public authService: AuthService,private readonly router: Router,) {
         this.themeService.themeClassChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(themeClass => {
 			this.themeClass = themeClass;
         });
@@ -28,7 +34,20 @@ export class SidebarComponent implements OnDestroy {
             this.darkClass = darkClass;
         });
     }
-    
+	
+	ngOnInit() {
+		this.userName = this.dataSharingService.loginResponse.username;
+		
+		//debugger;
+		// this.dataSharingService.userDetails.subscribe(message => (this.loginResponse= message)); //<= Always get current value!
+		// this.loginResponse.username;
+	   }
+
+	   logOut(){
+			this.authService.clearSession();
+			this.router.navigate(['/authentication']);
+	   }
+
     ngOnDestroy() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();

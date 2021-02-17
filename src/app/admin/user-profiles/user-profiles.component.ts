@@ -1,7 +1,12 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LocalDataSource } from 'ng2-smart-table';
+import { NotificationService } from '../../../app/services/notification.service';
+import { environment } from '../../../environments/environment';
+import { ApiCallService } from '../../../app/services/api-call.service';
 import { EditFormComponent } from './edit-form/edit-form.component';
+import { NgxSpinnerService } from 'ngx-spinner';
  
 @Component({
   selector: 'app-user-profiles',
@@ -12,7 +17,7 @@ export class UserProfilesComponent implements OnInit {
  
   sourceData = new LocalDataSource();
  
-  constructor(private readonly modalService: NgbModal) { }
+  constructor(private readonly modalService: NgbModal, private apiCallService: ApiCallService, private notificationService: NotificationService, private spinnerService: NgxSpinnerService) { }
  
   ngOnInit() {
     this.sourceData.load(this.data);
@@ -98,10 +103,33 @@ export class UserProfilesComponent implements OnInit {
   }
  
   onDeleteConfirm(event) {
-    console.log("Delete Event In Console")
+
     console.log(event);
     if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
+      this.spinnerService.show(); 
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'request': 'true'
+        })
+      };
+        this.apiCallService.deleteData(environment.appUrl + '/profile/' + event.data.id, httpOptions ).subscribe(
+          (response: any) => {
+            console.log(response);
+            if(response!==null){
+              this.spinnerService.hide();
+              this.notificationService.success('User deleted');
+              console.log(response);
+              event.confirm.resolve();
+            }
+    
+          },
+          (error) => {
+            this.spinnerService.hide();
+            this.notificationService.error('Failed to delete the user');
+            console.log(error);
+            event.confirm.reject();
+          }
+        )
     } else {
       event.confirm.reject();
     }

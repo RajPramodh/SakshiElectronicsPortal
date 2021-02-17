@@ -20,6 +20,8 @@ import { RouterModule } from '@angular/router';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CommonElementsModule } from '../common-elements/common-elements.module';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
 	declarations: [
@@ -38,6 +40,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 		PageTestimonialsComponent,
 		PageFaqComponent,
 		PageMaintananceComponent
+		
 	],
 	imports: [
 		CommonModule,
@@ -45,7 +48,10 @@ import { NgxGalleryModule } from 'ngx-gallery';
 		RouterModule,
 		NgxEchartsModule,
         CommonElementsModule,
-        NgxGalleryModule
+		NgxGalleryModule,
+		FormsModule,
+		ReactiveFormsModule,
+		NgxSpinnerModule
 	],
 	exports: []
 })

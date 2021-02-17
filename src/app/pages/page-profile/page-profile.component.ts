@@ -4,6 +4,17 @@ import { SidebarService } from '../../services/sidebar.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { LoginResponse } from '../../../app/model/user.service';
+import { DataSharingService } from '../../../app/services/data-sharing.service';
+import { ApiCallService } from '../../../app/services/api-call.service';
+import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { NotificationService } from '../../../app/services/notification.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
 	selector: 'app-page-profile',
@@ -12,13 +23,18 @@ import { Subject } from 'rxjs';
 })
 export class PageProfileComponent implements OnDestroy {
 
+	updateProfileForm: FormGroup;
+	profileDetails: LoginResponse;
+	isEditClicked: boolean = false;
+
 	public visitorsOptions: EChartOption = {};
 	public visitsOptions: EChartOption = {};
 	public sidebarVisible: boolean = true;
     public fragment: string = "settings";
     private ngUnsubscribe = new Subject();
 
-	constructor(private sidebarService: SidebarService, private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute) {
+	constructor(private readonly formBuilder: FormBuilder,private sidebarService: SidebarService, private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute, 
+		public dataSharingService: DataSharingService, public apiCallService: ApiCallService, private toastr: ToastrService,private notificationService: NotificationService, private spinnerService: NgxSpinnerService) {
         this.activatedRoute.fragment.pipe(takeUntil(this.ngUnsubscribe)).subscribe((fragment: string) => {
 			if (fragment) {
 				this.fragment = fragment;
@@ -28,10 +44,82 @@ export class PageProfileComponent implements OnDestroy {
 		this.visitsOptions = this.loadLineChartOptions([4, 6, 3, 2, 5, 6, 5, 4], "#f4516c");
 	}
 
+	ngOnInit() {
+		
+		// this.dataSharingService.userDetails.subscribe(
+		// 	userData => this.profileDetails = userData
+		// );
+		this.profileDetails = this.dataSharingService.loginResponse;
+		this.updateProfileForm = this.formBuilder.group({
+			userId: [this.profileDetails.id],
+			userName: [this.profileDetails.username],
+			emailId: [this.profileDetails.email],
+			mobileNo: [''],
+		});
+		this.updateProfileForm.disable();
+	}
+
     ngOnDestroy() {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
-    }
+	}
+	
+	onEditForm(){
+		this.isEditClicked = true;
+		this.updateProfileForm.enable();
+		this.updateProfileForm.get('userId').disable();
+	}
+
+	onCancelEdit(){
+		this.isEditClicked = false;
+		this.updateProfileForm.disable();
+	}
+
+	onSaveEdit(){
+		this.spinnerService.show();
+		this.updateProfileForm.disable();
+		
+		if (this.updateProfileForm.invalid) {
+			return;
+		}
+
+
+		const payload = new Object();
+		payload['username'] = this.updateProfileForm.value.userName;
+		payload['email'] = this.updateProfileForm.value.emailId;
+		payload['mobile'] = this.updateProfileForm.value.mobileNo;
+		payload['id'] = this.updateProfileForm.value.userId;
+
+		const httpOptions = {
+			headers: new HttpHeaders({
+				'request': 'true'
+			})
+		};
+
+
+		this.apiCallService.putData(environment.appUrl + '/auth/signin' ,payload ,httpOptions).subscribe(
+			(response: any) => {
+				this.spinnerService.hide();
+				console.log(response);
+				if(response!==null){ 
+
+					// this.dataSharingService.loginResponse = response;
+					// this.authService.setSession(this.dataSharingService.loginResponse);
+					// this.dataSharingService.latestUserDetails(response);
+						this.notificationService.success('Profile Information Saved ');
+					// this.router.navigate(['/admin/user-profiles']);
+						this.isEditClicked = false;
+				}
+
+			},
+			(error) => {
+				this.spinnerService.hide();
+				this.notificationService.error(error.message);
+				this.onEditForm();
+				console.log(error);
+			}
+		)
+	}
 
 	toggleFullWidth() {
 		this.sidebarService.toggle();
