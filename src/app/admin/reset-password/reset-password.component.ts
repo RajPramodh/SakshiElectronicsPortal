@@ -20,21 +20,35 @@ export class ResetPasswordComponent implements OnInit {
   passwordResetForm: FormGroup;
   public sidebarVisible: boolean = true;
 
-  constructor(private router: Router, private readonly formBuilder: FormBuilder,private sidebarService: SidebarService, private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute, 
-    public dataSharingService: DataSharingService, public apiCallService: ApiCallService, private toastr: ToastrService,private notificationService: NotificationService, 
+
+
+  constructor(private router: Router, private readonly formBuilder: FormBuilder, private sidebarService: SidebarService, private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute,
+    public dataSharingService: DataSharingService, public apiCallService: ApiCallService, private toastr: ToastrService, private notificationService: NotificationService,
     private spinnerService: NgxSpinnerService, private authService: AuthService) { }
   ngOnInit(): void {
     this.passwordResetForm = this.formBuilder.group({
-			userId: [''],
-			userName: [''],
-			emailId: [''],
-			mobileNo: [''],
-		});
+      userId: [''],
+      userName: [''],
+      emailId: [''],
+      mobileNo: [''],
+    });
   }
 
   onSubmit() {
 
     this.router.navigate(['/authentication/page-login']);
-}
+  }
+
+  public toggleFullWidth() {
+    
+  }
+
+  public onCancelResetPassword() {
+
+  }
+
+  public onReset() {
+
+  }
 
 }

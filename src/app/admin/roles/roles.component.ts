@@ -19,6 +19,7 @@ import { EditFormComponent } from '../user-profiles/edit-form/edit-form.componen
 })
 export class RolesComponent implements OnInit {
 
+  isResizing: boolean = true;
     
   sourceData = new LocalDataSource();
  

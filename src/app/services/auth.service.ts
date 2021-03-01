@@ -92,7 +92,7 @@ export class AuthService {
   clearSession() {
     localStorage.clear();
   }
-
+  
   getTodaysDate() {
     const currentDate = new Date();
     var newDate = new Date();

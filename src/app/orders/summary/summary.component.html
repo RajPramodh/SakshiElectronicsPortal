@@ -63,9 +63,70 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="body">
-                                    <ng2-smart-table class="user-profile clearfix" [settings]="settings" [source]="data"
+                                    <!-- <ng2-smart-table class="user-profile clearfix" [settings]="settings" [source]="data"
                                         (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
-                                        (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+                                        (createConfirm)="onCreateConfirm($event)"></ng2-smart-table> -->
+
+                                    <table id="tableId" class=" table-bordered"
+                                        aria-describedby="Order Summary Table">
+                                        <thead>
+                                            <tr>
+                                                <th class="theme-color" *ngFor="let columnName of tableHeaders">
+                                                    {{columnName}} {{data[columnName]}}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <!-- <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="form-control custom-control-input" id="customCheck1"
+                                                            (click)="onSelectAll($event.target.checked)" [value]="true" [(ngModel)]="temp"
+                                                            [ngModelOptions]="{standalone: true}">
+                                                        <label class="custom-control-label" for="customCheck1"></label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Application" class="filter-input"
+                                                            formControlName="applicationName" (input)="onFilterChange()" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Program" class="filter-input"
+                                                            formControlName="programName" (input)="onFilterChange()" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Service" class="filter-input"
+                                                            formControlName="platformName" (input)="onFilterChange()" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="Program Owner" class="filter-input"
+                                                            formControlName="programOwner" (input)="onFilterChange()" />
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <input type="text" placeholder="BizOps Guild Lead" class="filter-input"
+                                                            formControlName="bizOpsOwner" (input)="onFilterChange()" />
+                                                    </div>
+                                                </td>
+                        
+                                            </tr>
+                                        </tbody> -->
+                                        <tbody>
+                                        <tr *ngFor="let row of data">
+                                            <td *ngFor="let columnId of tableKeyHeaders">
+                                                {{row[columnId]}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
                                 </div>
 
                             </div>

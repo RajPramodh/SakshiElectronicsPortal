@@ -28,12 +28,32 @@ export class SummaryComponent implements OnInit {
 	public sidebarVisible: boolean = true;
 	public showInboxMenu: boolean = false;
 
+	tableHeaders = ['Order Id', 'Used Item Info', 'Buy Back Category', 'New Product Category', 'City', 'Partner Email', 'Order Date', 'Base Exchange Value', 'Sponsored Value', 'Sponsor Email', 'Diagnostic Discount', 'Diagnostic Test Status', 'Order Status'];
+	tableKeyHeaders = ['orderId', 'usedItemInfo', 'buyBackCategory', 'newProductCategory', 'city', 'partnerEmail', 'orderDate', 'baseExchangeValue', 'sponsoredValue', 'sponsorEmail', 'diagnosticDiscount', 'diagnosticTestStatus', 'orderStatus'];
+
+	data = [
+		{
+		  "ID" : "1",
+		  "Name" : "Rahul",
+		  "Age" : "21",
+		  "Gender" : "Male",
+		  "Country" : "India"
+		},
+		{
+		  "ID" : "2",
+		  "Name" : "Ajay",
+		  "Age" : "25",
+		  "Gender" : "Male",
+		  "Country" : "India"
+		}];
+
 	constructor(private sidebarService: SidebarService, private cdr: ChangeDetectorRef, private apiCallService: ApiCallService, private notificationService: NotificationService, private spinnerService: NgxSpinnerService
 		, public dataSharingService: DataSharingService, private readonly formBuilder: FormBuilder) {
 	}
 
 	ngOnInit() {
-		this.sourceData.load(this.data);
+		this.callOrderSummaryApi();
+		//this.sourceData.load(this.data);
 		this.fileUploadForm = this.formBuilder.group({
 			file: ['']
 		  });
@@ -101,70 +121,6 @@ export class SummaryComponent implements OnInit {
 		)
 
 	}
-
-
-	// uploadFile(fileToUpload: File){
-	// 	this.spinnerService.show();
-	// 	const formData: FormData = new FormData();
-	// 	formData.append('fileKey', this.fileToUpload, this.fileToUpload.name);
-
-
-	// 	const payload = new Object();
-	// 	payload['file'] = formData.get('fileKey');
-
-	// 	//console.log(this.dataSharingService.loginResponse);
-
-	// 	const tokenType = this.dataSharingService.loginResponse.tokenType;
-	// 	const accessToken = this.dataSharingService.loginResponse.accessToken;
-
-
-	// 	const httpOptions = {
-	// 	  headers: new HttpHeaders({
-	// 		'Authorization': tokenType + ' ' + accessToken,
-	// 		'Accept': 'application/json',
-	//         'Access-Control-Allow-Origin': '*',
-	//         'Content-Type': 'multipart/form-data' 
-	// 	  })
-	// 	};
-
-	// 	  this.apiCallService.postData(environment.appUrl + '/excel/uploadExcel' ,payload ,httpOptions).subscribe(
-	// 		(response: any) => {
-	// 		  this.spinnerService.hide();
-	// 		  console.log(response);
-	// 		  if(response!==null){
-	// 			this.notificationService.success('User details updated');
-	// 			console.log(response);
-	// 		  }
-
-	// 		},
-	// 		(error) => {
-	// 		  this.spinnerService.hide();
-	// 		  this.notificationService.error(error.error.message);
-	// 		  console.log(error);
-	// 		}
-	// 	  )
-
-	// }
-	// postFile(fileToUpload: File): Observable<boolean> {
-	// 	const endpoint = 'your-destination-url';
-	// 	const formData: FormData = new FormData();
-	// 	formData.append('fileKey', fileToUpload, fileToUpload.name);
-	// 	return this.httpClient
-	// 	  .post(endpoint, formData, { headers: yourHeadersConfig })
-	// 	  .map(() => { return true; })
-	// 	  .catch((e) => this.handleError(e));
-	// }
-
-	// postFile(fileToUpload: File): Observable<boolean> {
-	// 	const endpoint = 'your-destination-url';
-	// 	const formData: FormData = new FormData();
-	// 	formData.append('fileKey', fileToUpload, fileToUpload.name);
-	// 	return this.httpClient
-	// 	  .post(endpoint, formData, { headers: yourHeadersConfig })
-	// 	  .map(() => { return true; })
-	// 	  .catch((e) => this.handleError(e));
-	// }
-
 	
 	toggleFullWidth() {
 		this.sidebarService.toggle();
@@ -212,29 +168,6 @@ export class SummaryComponent implements OnInit {
 		},
 	  };
 	 
-	  data = [
-		{
-			"id": 1,
-			"subjectLine": "sdcds",
-			"description": "dfcdv",
-			"status": "sdc",
-			"dispatched": true
-		},
-		{
-			"id": 2,
-			"subjectLine": "scdsv",
-			"description": "sdvdvg",
-			"status": "sdcsdc",
-			"dispatched": true
-		},
-		{
-			"id": 3,
-			"subjectLine": "sdvdv",
-			"description": "sefg",
-			"status": "cs",
-			"dispatched": true
-		}
-	  ];
 	
 	 
 	  onEdit(rowData: any) {
@@ -291,5 +224,39 @@ export class SummaryComponent implements OnInit {
 		this.sourceData.update(event.data, event.newData);
 		event.confirm.resolve();
 	  }
+
+
+	callOrderSummaryApi(){
+
+		this.spinnerService.show();
+
+		const tokenType = this.dataSharingService.loginResponse.tokenType;
+		const accessToken = this.dataSharingService.loginResponse.accessToken;
+
+		const httpOptions = {
+		  headers: new HttpHeaders({
+			'Authorization': tokenType + ' ' + accessToken
+		  })
+		};
+
+
+		this.apiCallService.getData(environment.appUrl + '/excel/getCompleteExcelData', httpOptions).subscribe(
+			(response: any) => {
+				this.spinnerService.hide();
+				this.data = response;
+				if (response !== null) {
+					this.notificationService.success('User details updated');
+					console.log(response);
+				}
+
+			},
+			(error) => {
+				this.spinnerService.hide();
+				this.notificationService.error(error.error.message);
+				console.log(error);
+			}
+		)
+	}
+
 
 }

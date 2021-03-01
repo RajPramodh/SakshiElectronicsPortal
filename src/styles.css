@@ -53,3 +53,7 @@
     padding-left: 20px;
     border: 1px solid #00bcd4;
 }
+
+.theme-color {
+    background-color: #00bcd4;
+}

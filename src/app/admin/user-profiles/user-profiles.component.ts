@@ -16,6 +16,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class UserProfilesComponent implements OnInit {
  
   sourceData = new LocalDataSource();
+  isResizing:boolean = true;
  
   constructor(private readonly modalService: NgbModal, private apiCallService: ApiCallService, private notificationService: NotificationService, private spinnerService: NgxSpinnerService) { }
  
