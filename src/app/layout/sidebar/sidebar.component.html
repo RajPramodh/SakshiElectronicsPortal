@@ -8,11 +8,12 @@
                     <strong>{{userName}}</strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account" ngbDropdownMenu>
                     <li class = "ngDropdown" ngbDropdownItem><a [routerLink]="['/admin/pages/page-profile']"><i class="icon-user"></i>My Profile</a></li>
+                    <li class = "ngDropdown" ngbDropdownItem><a [routerLink]="['/admin/reset-password']"><i class="fa fa-key"></i>Reset Password</a></li>
                     <li class = "ngDropdown" (click)="logOut()" ngbDropdownItem><a [routerLink]="['/authentication/page-login']"><i class="icon-power"></i>Logout</a></li>
                 </ul>
             </div>
             <hr>
-            <ul class="row list-unstyled">
+            <!-- <ul class="row list-unstyled">
                 <li class="col-4">
                     <small>Sales</small>
                     <h6>456</h6>
@@ -25,7 +26,7 @@
                     <small>Revenue</small>
                     <h6>$2.13B</h6>
                 </li>
-            </ul>
+            </ul> -->
         </div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
@@ -48,20 +49,17 @@
                                 <span>Admin</span></a>
                             <ul *ngIf="currentActiveMenu == 'admin'">
                                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/user-profiles']">User Profiles</a></li>
-                                <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/dashboard/iot']">IoT</a></li> -->
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/roles']">Roles</a></li>
                             </ul>
                         </li>
-                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [ngClass]="{'active':currentActiveMenu == 'app'}">
-                            <a class="has-arrow" (click)="activeInactiveMenu('app')"><i class="icon-grid"></i> <span>App</span></a>
-                            <ul *ngIf="currentActiveMenu == 'app'">
-                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-inbox']">Inbox</a></li>
-                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-chat']">Chat</a></li>
-                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-calendar']">Calendar</a></li>
-                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-contact-grid']">Contact
-                                        Card <span class="badge badge-warning float-right">New</span></a></li>
+                         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [ngClass]="{'active':currentActiveMenu == 'orders'}">
+                            <a class="has-arrow" (click)="activeInactiveMenu('orders')"><i class="icon-grid"></i> <span>Orders</span></a>
+                            <ul *ngIf="currentActiveMenu == 'orders'">
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/orders/summary']">Summary</a></li>
+                                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/admin/app/app-chat']">Invoices</a></li>
                             </ul>
                         </li>
-                        <li [ngClass]="{'active':currentActiveMenu == 'file-manager'}">
+                        <!--<li [ngClass]="{'active':currentActiveMenu == 'file-manager'}">
                             <a class="has-arrow" (click)="activeInactiveMenu('file-manager')"><i class="icon-folder"></i>
                                 <span>File Manager</span></a>
                             <ul *ngIf="currentActiveMenu == 'file-manager'">
@@ -190,7 +188,7 @@
                                 <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a
                                         [routerLink]="['/admin/maps/leaflet']">Leaflet</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
             </div>

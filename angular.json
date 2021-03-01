@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "sakshi": {
+    "Ultrasharp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -56,18 +56,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sakshi:build"
+            "browserTarget": "Ultrasharp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "sakshi:build:production"
+              "browserTarget": "Ultrasharp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "sakshi:build"
+            "browserTarget": "Ultrasharp:build"
           }
         },
         "test": {
@@ -103,7 +103,7 @@
         }
       }
     },
-    "sakshi-e2e": {
+    "Ultrasharp-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -112,7 +112,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "sakshi:serve"
+            "devServerTarget": "Ultrasharp:serve"
           }
         },
         "lint": {
@@ -129,7 +129,7 @@
       }
     }
   },
-  "defaultProject": "SakshiElectronicsPortal",
+  "defaultProject": "UltrasharpElectronicsPortal",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

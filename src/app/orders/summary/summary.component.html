@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-5 col-md-8 col-sm-12">
+                <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"
+                        (click)="toggleFullWidth()">
+                        <i class="fa fa-arrow-left" *ngIf="sidebarVisible"></i>
+                        <i class="fa fa-arrow-right" *ngIf="!sidebarVisible"></i>
+                    </a> Summary</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="['/admin']"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item">Orders</li>
+                    <li class="breadcrumb-item active">Summary</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Orders Summary</h2>
+                </div>
+
+                <div class="body">
+                    <blockquote>
+                        <div class="form-group blockquote blockquote-primary">
+
+                            <!-- <label for="file">Choose File : </label>
+                        <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+                        <button type="button" class="btn-large btn-submit" (click)= "uploadFile()">><i
+                            class="material-icons">save</i></button> -->
+                            <form [formGroup]="fileUploadForm" (ngSubmit)="onFormSubmit()">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div>
+                                            <h6 class="head-title margin-top-8"><span>Upload Excel</span></h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 text-center">
+
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="myfile"
+                                                (change)="onFileSelect($event)" #UploadFileInput>
+                                            <label class="custom-file-label" for="customFile">{{fileInputLabel ||
+                                                'Choose File'}}</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6 text-center">
+                                        <button class="btn theme-btn btn-primary" type="submit">Upload</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </blockquote>
+                    <hr>
+                    <h6>Order Details</h6>
+                    <div class="row clearfix">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="body">
+                                    <ng2-smart-table class="user-profile clearfix" [settings]="settings" [source]="data"
+                                        (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
+                                        (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color: white">Please Wait. </p>
+</ngx-spinner>

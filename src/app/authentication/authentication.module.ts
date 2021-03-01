@@ -16,7 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
-	declarations: [PageLoginComponent, AuthenticationComponent, PageRegisterComponent, PageLockscreenComponent, PageForgotPasswordComponent, PageNotFoundComponent, PageForbiddonErrorComponent, PageIsErrorComponent, PageTryLaterComponent],
+	declarations: [PageLoginComponent, AuthenticationComponent, PageRegisterComponent, 
+		PageLockscreenComponent, PageForgotPasswordComponent, PageNotFoundComponent, 
+		PageForbiddonErrorComponent, PageIsErrorComponent, PageTryLaterComponent],
 	imports: [
 		FormsModule,
         ReactiveFormsModule,

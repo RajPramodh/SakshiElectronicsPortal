@@ -70,7 +70,7 @@ export class EditFormComponent implements OnInit {
           },
           (error) => {
             this.spinnerService.hide();
-            this.notificationService.error('Failed to saved the user details, Contact Admin');
+            this.notificationService.error(error.error.message);
             console.log(error);
           }
         )

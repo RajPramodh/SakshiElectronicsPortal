@@ -35,6 +35,8 @@ export class ApiCallService {
   }
 
   postData(requestUrl: string, requestBody: any, headerReq?: any): Observable<any> {
+    console.log(requestBody);
+    console.log(headerReq);
     return this.httpClient.post<object>(requestUrl, requestBody, headerReq ? headerReq : this.httpOptions);
   }
 

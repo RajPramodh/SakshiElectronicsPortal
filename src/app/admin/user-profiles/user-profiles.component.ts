@@ -67,20 +67,20 @@ export class UserProfilesComponent implements OnInit {
   data = [
     {
       id: 1,
-      roles: "role1",
+      roles: "user",
       username: "Bret",
       email: "Sincere@april.biz"
     },
     {
       id: 2,
-      roles: "role2",
+      roles: "admin",
       username: "Antonette",
       email: "Shanna@melissa.tv"
     },
  
     {
       id: 11,
-      roles: "role3",
+      roles: "admin",
       username: "Nicholas.Stanton",
       email: "Rey.Padberg@rosamond.biz"
     }

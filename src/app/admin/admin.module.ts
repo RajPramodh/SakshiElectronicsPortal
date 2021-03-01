@@ -32,7 +32,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { FormModule } from '../form/form.module';
 import { BlogsModule } from '../blogs/blogs.module';
 import { WidgetsModule } from '../widgets/widgets.module';
-import { IotDashboardComponent } from './iot-dashboard/iot-dashboard.component';
+import { RolesComponent } from './roles/roles.component';
 import { MapsModule } from '../maps/maps.module';
 import { UserProfilesComponent } from './user-profiles/user-profiles.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -40,6 +40,8 @@ import { EditFormComponent } from './user-profiles/edit-form/edit-form.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { OrdersModule } from '../orders/orders.module';
 
 @NgModule({
 	imports: [
@@ -65,7 +67,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 		Ng2SmartTableModule,
 		ReactiveFormsModule,
 		FormsModule,
-		NgxSpinnerModule
+		NgxSpinnerModule,
+		OrdersModule
 	],
 	declarations: [
 		AdminComponent,
@@ -82,9 +85,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 		TopProductsComponent,
 		ReferralsComponent,
 		TotalRevenueComponent,
-		IotDashboardComponent,
+		RolesComponent,
 		UserProfilesComponent,
 		EditFormComponent,
+		ResetPasswordComponent,
 	],
 	entryComponents:[EditFormComponent]
 })

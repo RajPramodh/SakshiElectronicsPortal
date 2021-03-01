@@ -59,7 +59,7 @@ export class AuthService {
     this.loginResponse.accessToken = userAccessTokenDecrypt;
     this.loginResponse.tokenType = 'Bearer';
 
-    this,this.dataSharingService.loginResponse = this.loginResponse;
+    this.dataSharingService.loginResponse = this.loginResponse;
 
 
     if (sessionKey === sessionKeyDecrypt) {
